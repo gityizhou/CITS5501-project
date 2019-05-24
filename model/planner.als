@@ -32,4 +32,4 @@ check checkReverse for 5
 assert oneStopCheck{
 	first = last
 }
-check oneStopCheck for 5 but 1 Route
+check oneStopCheck for 5 but 1 TravelStop
