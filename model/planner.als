@@ -15,7 +15,7 @@ fact NextStop_notself{
 	all n : TravelStop | n.nextTravelStop != n
 	}
 
-//set up the stop model of the travel stops
+//set up the stop model fact of the travel stops
 fact TravelStopModel{
 	all n : TravelStop - last | one n.nextTravelStop && n.nextTravelStop = n.next
 	no last.nextTravelStop

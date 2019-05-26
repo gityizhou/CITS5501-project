@@ -14,18 +14,29 @@ public class TravelStopTest {
    */
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
-    TravelStop tsTest1 = new TravelStop(33.3, 22.2, "mystreet", "mysuburb");
-
+    //prefix value for testing get methods in this class
+    TravelStop tsTest1 = new TravelStop(33.3, 22.2, "mystreet1", "mysuburb1");
   }
-
-  @Test(expected = IllegalArgumentException)
-  public void testNotExistSuburbStreet() {
-    TravelStop tsTest2 = new TravelStop(33.3, 22.2, "nostreet", "nosuburb");
-  }
-
-  /**
-   * Test method for {@link TravelStop#getLatitude()}.
+  /*
+  There is no on-disk file in this project,
+  so that I will use four values to simulate this situation,
+  “mystreet” , “mysuburb” is in this on-disk file
+  “nostreet”, “nosuburb” is not in this file.
    */
+
+  //this test case tests the situation that if the street and suburb value not exist in the on-disk file
+  @Test(expected = IllegalArgumentException)
+  public void testNotExistStreet() {
+    TravelStop tsTest2 = new TravelStop(44.4, 55.5, "nostreet", "mysuburb");
+  }
+
+  //this test case tests the situation that when latitude is larger than 92
+  @Test(expected = IllegalArgumentException)
+  public void testLatitudeOverValue() {
+    TravelStop tsTest2 = new TravelStop(92, 55.5, "mystreet", "mysuburb");
+  }
+
+  //this method test if getLatitude method can get right value of latitude
   @Test
   public void testGetLatitude() {
     double result = tsTest1.getLatitude();
@@ -34,9 +45,7 @@ public class TravelStopTest {
 
   }
 
-  /**
-   * Test method for {@link TravelStop#getLongitude()}.
-   */
+  //this method test if getLongitude method can get right value of longtitude
   @Test
   public void testGetLongitude() {
     double result = tsTest1.getLongitude();
@@ -44,23 +53,11 @@ public class TravelStopTest {
     assertEquals(expected,result);
   }
 
-  /**
-   * Test method for {@link TravelStop#getStreet()}.
-   */
+  //this method test if getStreet method can get right value of street
   @Test
   public void testGetStreet() {
     String result = tsTest1.getStreet();
     String expected = "mystreet";
-    assertEquals(expected,result);
-  }
-
-  /**
-   * Test method for {@link TravelStop#getSuburb()}.
-   */
-  @Test
-  public void testGetSuburb() {
-    String result = tsTest1.getSuburb();
-    String expected = "mysuburb";
     assertEquals(expected,result);
   }
 
